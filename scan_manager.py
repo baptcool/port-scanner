@@ -80,20 +80,30 @@ class Scan_Manager():
             print("scan started")
             PourcentageFinished = 0
             while PourcentageFinished != 100:
+               # print(self.scan_result)
                 print("--- "  + str(PourcentageFinished) + " %  finished")
                 time.sleep(1)
                 PourcentageFinished = 0
                 for k, v in self.scan_result.items():
                     if v["finished"] == True:
                         PourcentageFinished += 1
-                PourcentageFinished =PourcentageFinished//len(self.scan_result.items()) *100
+                PourcentageFinished =round(PourcentageFinished/len(self.scan_result.items()) *100)
                 
                 
-                
+            try:
+                for host in self.scan_result:
+                    
+                    #print(self.scan_result[host]["res"]["scan"][host]["hostnames"][0]["name"])                
+                    for sousHost in  self.scan_result[host]["res"]["scan"]:
+                        print(sousHost + " is " + self.scan_result[host]["res"]["scan"][host]["status"]["state"])
+                    
+                          #    [host]["tcp"]:
+                        #if self.scan_result[host]["res"]["scan"][host]["tcp"][port]["state"] == "open":
+                         #   compteur+=1
+                    #print("number open ports : " + str(compteur))
+            except:
+                print("error while reading scan results")  
             
-            print(self.scan_result)
-            
-    
 
     
        

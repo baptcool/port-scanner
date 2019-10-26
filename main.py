@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     adressesipv4, adressesipv6 = get_user_parameters()
     multiTreadActive = 1
-    nombrethread = 10
+    nombrethread = 1
     Scan_Manager(multiTreadActive,nombrethread,adressesipv4,adressesipv6)
 
     
