@@ -6,7 +6,7 @@ import subprocess
 import queue
 import threading
 from logger import Logger
-
+from report_generator import generateReport
 import scan
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
@@ -44,7 +44,7 @@ class Scan_Manager():
                 arraytemp = [] 
         
         self.startThread()
-        
+        generateReport(self.scan_result)
 
 
 
