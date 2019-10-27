@@ -5,10 +5,10 @@ def doScanIp4(adressesipv4,scan_result):
     #print("cici")
     
     
-    print("voici ladresse", adressesipv4)
+    #print("voici ladresse", adressesipv4)
     for adress in adressesipv4:  
         
-        scan_result[adress]["res"] = nm.scan(hosts=adress,arguments="-sV")
+        scan_result[adress]["res"] = nm.scan(hosts=adress,arguments="-sV --version-light")
         
         scan_result[adress]["finished"] = True
         #print(nm.scaninfo())
@@ -25,7 +25,7 @@ def doScanIp6(adressesipv6,scan_result):
     #print("cici")
     for adress in adressesipv6:  
         
-        scan_result[adress]["res"] = nm.scan(hosts=adress,arguments="-6 -sV")
+        scan_result[adress]["res"] = nm.scan(hosts=adress,arguments="-6 -sV --version-light")
         
         scan_result[adress]["finished"] = True
         #print(nm.scaninfo())

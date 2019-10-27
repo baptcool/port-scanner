@@ -88,7 +88,7 @@ class Scan_Manager():
             # temp[0] array de ips
             # temp[1] type de ips ipv4/6
             
-            print("taille tuple",temp)
+            #print("taille tuple",temp)
             if temp[1] == "ipv6":
                 scan.doScanIp6(temp[0], self.scan_result)
             elif temp[1] == "ipv4":
@@ -116,7 +116,7 @@ class Scan_Manager():
                 array.append(threading.Thread(target = self.threadtask, args=[]))
             for e in array:
                 e.start()
-                print("thread lancé")
+                #print("thread lancé")
             print("scan started")
             PourcentageFinished = 0
             while PourcentageFinished != 100:

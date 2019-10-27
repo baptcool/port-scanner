@@ -11,7 +11,7 @@ def ecritureFichier(htmlText):
 def generateReport(result):
     head = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"xml:lang=\"en\" lang=\"en\"><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />  <title>Scan Report</title> </head><body> <center><h2>Scan Report</h2> <p>Total hosts : totalhosts   Up hosts : uphosts</p></center><br>"
     bottom = "	<br>	<br>	<hr>	<br>	<br></body></html>"
-    templateMachine = "<p>	<h3>Nmap scan report for NameMachine (IpMachine)</h3>	<p>Host is MachineState</p>	<p>PORT      STATE SERVICE VERSION</p>	<ul>	#ici	</ul></p>"
+    templateMachine = "<p>	<h3>Nmap scan report for NameMachine (IpMachine)</h3>	<p>Host is MachineState</p><p>Mac address : MacAdress</p>	<p>PORT      STATE SERVICE VERSION</p> 	<ul>	#ici	</ul></p>"
     templatePortText = "<li>PortNumber     PortState  PortService PortSVersion</li>"
     
 
@@ -30,9 +30,14 @@ def generateReport(result):
                   
             for sousHost in  result[host]["res"]["scan"]:
                 #print(sousHost + " is " + result[host]["res"]["scan"][sousHost]["status"]["state"])
+                
                 temptemplateMachine = templateMachine.replace("NameMachine", result[host]["res"]["scan"][sousHost]["hostnames"][0]["name"]+" "+result[host]["res"]["scan"][sousHost]["hostnames"][0]["type"] )
                 temptemplateMachine = temptemplateMachine.replace("IpMachine", sousHost)
                 temptemplateMachine = temptemplateMachine.replace("MachineState",result[host]["res"]["scan"][sousHost]["status"]["state"] + " reason : " + result[host]["res"]["scan"][sousHost]["status"]["reason"])
+                if "mac" in result[host]["res"]["scan"][sousHost]["addresses"] and result[host]["res"]["scan"][sousHost]["addresses"]["mac"] != '':
+                    temptemplateMachine = temptemplateMachine.replace("MacAdress", result[host]["res"]["scan"][sousHost]["addresses"]["mac"])
+                else:
+                    temptemplateMachine = temptemplateMachine.replace("MacAdress", "Not found")
                 try:
                     for port in result[host]["res"]["scan"][sousHost]["tcp"]:                    
                         temptemplatePortText = templatePortText.replace("PortNumber",str(port))
