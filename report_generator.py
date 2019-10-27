@@ -9,7 +9,7 @@ def ecritureFichier(htmlText):
         print("error while writing scan repport")
 
 def generateReport(result):
-    head = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"xml:lang=\"en\" lang=\"en\"><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />  <title>Scan Report</title> </head><body> <center><h2>Scan Report</h2> <p>Total hosts : 3   Up hosts : 3</p></center><br>"
+    head = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"xml:lang=\"en\" lang=\"en\"><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />  <title>Scan Report</title> </head><body> <center><h2>Scan Report</h2> <p>Total hosts : totalhosts   Up hosts : uphosts</p></center><br>"
     bottom = "	<br>	<br>	<hr>	<br>	<br></body></html>"
     templateMachine = "<p>	<h3>Nmap scan report for NameMachine (IpMachine)</h3>	<p>Host is MachineState</p>	<p>PORT      STATE SERVICE VERSION</p>	<ul>	#ici	</ul></p>"
     templatePortText = "<li>PortNumber     PortState  PortService PortSVersion</li>"
