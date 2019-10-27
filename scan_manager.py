@@ -77,6 +77,7 @@ class Scan_Manager():
                 array.append(threading.Thread(target = self.threadtask, args=[]))
             for e in array:
                 e.start()
+                print("thread lancé")
             print("scan started")
             PourcentageFinished = 0
             while PourcentageFinished != 100:
