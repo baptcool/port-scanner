@@ -30,13 +30,20 @@ def generateReport(result):
                 temptemplateMachine = templateMachine.replace("NameMachine", result[host]["res"]["scan"][sousHost]["hostnames"][0]["name"]+" "+result[host]["res"]["scan"][sousHost]["hostnames"][0]["type"] )
                 temptemplateMachine = temptemplateMachine.replace("IpMachine", sousHost)
                 temptemplateMachine = temptemplateMachine.replace("MachineState",result[host]["res"]["scan"][sousHost]["status"]["state"])
-                
-                for port in result[host]["res"]["scan"][sousHost]["tcp"]:                    
-                    temptemplatePortText = templatePortText.replace("PortNumber",str(port))
-                    temptemplatePortText=temptemplatePortText.replace("PortState",result[host]["res"]["scan"][sousHost]["tcp"][port]["state"])
-                    temptemplatePortText=temptemplatePortText.replace("PortService",result[host]["res"]["scan"][sousHost]["tcp"][port]["name"] + " " +result[host]["res"]["scan"][sousHost]["tcp"][port]["product"])
-                    temptemplatePortText=temptemplatePortText.replace("PortServiceVersion",result[host]["res"]["scan"][sousHost]["tcp"][port]["version"]+" "+result[host]["res"]["scan"][sousHost]["tcp"][port]["extrainfo"])
-                    temptemplateMachine = temptemplateMachine.replace("#ici	", temptemplatePortText + "#ici	")
+                try:
+                    for port in result[host]["res"]["scan"][sousHost]["tcp"]:                    
+                        temptemplatePortText = templatePortText.replace("PortNumber",str(port))
+                        temptemplatePortText=temptemplatePortText.replace("PortState",result[host]["res"]["scan"][sousHost]["tcp"][port]["state"])
+                        temptemplatePortText=temptemplatePortText.replace("PortService",result[host]["res"]["scan"][sousHost]["tcp"][port]["name"] + " " +result[host]["res"]["scan"][sousHost]["tcp"][port]["product"])
+                        temptemplatePortText=temptemplatePortText.replace("PortServiceVersion",result[host]["res"]["scan"][sousHost]["tcp"][port]["version"]+" "+result[host]["res"]["scan"][sousHost]["tcp"][port]["extrainfo"])
+                        temptemplateMachine = temptemplateMachine.replace("#ici	", temptemplatePortText + "#ici	")
+                except Exception as ex:
+                    if result[host]["res"]["scan"][sousHost]["tcp"] == None:
+                        temptemplateMachine = temptemplateMachine.replace("#ici	", "No open Ports" ) 
+                    print("error while reading open ports")      
+                    print(ex)
+                temptemplateMachine = temptemplateMachine.replace("#ici	", "") 
+                htmlText.append(temptemplateMachine)
               #    [host]["tcp"]:
             #if self.scan_result[host]["res"]["scan"][host]["tcp"][port]["state"] == "open":
              #   compteur+=1
