@@ -35,13 +35,45 @@ class Scan_Manager():
         ipParThr = nbIp//self.nbThr
         
         arraytemp = [] 
+        
+        #ipIndex=0
+        #while ipIndex<nbIp:
+            
+         #   if ipIndex < len(adressesipv4):
+         #       self.scan_result[adressesipv4[ipIndex]] = dict()
+         #       self.scan_result[adressesipv4[ipIndex]]["type"] = "ipv4"
+         #       self.scan_result[adressesipv4[ipIndex]]["finished"] = False 
+         #       arraytemp.append(adressesipv4[ipIndex])
+         #   else:
+         #       self.scan_result[adressesipv6[ipIndex]] = dict()
+         #       self.scan_result[adressesipv4[ipIndex]]["type"] = "ipv6"
+         #       self.scan_result[adressesipv6[ipIndex]]["finished"] = False 
+         #       arraytemp.append(adressesipv6[ipIndex])
+                
+                
+         #   if (ipIndex+1) % ipParThr == 0  or ( len(adressesipv4) != 0 and ipIndex+1 == len(adressesipv4)  ) :
+         #       self.arrayThr.put(arraytemp)
+         #       arraytemp = []
+         #   ipIndex+=1
+            
+             
         for index,ip in enumerate(adressesipv4):
             self.scan_result[ip] = dict()
             self.scan_result[ip]["finished"] = False 
+            self.scan_result[ip]["type"] = "ipv4"
             arraytemp.append(ip)
-            if (index+1) % ipParThr == 0  :
-                self.arrayThr.put(arraytemp)
-                arraytemp = [] 
+            if (index+1) % ipParThr == 0 or index+1 ==  len(adressesipv4) :
+                self.arrayThr.put((arraytemp,"ipv4"))
+                arraytemp = []
+        arraytemp = []
+        for index,ip in enumerate(adressesipv6):
+            self.scan_result[ip] = dict()
+            self.scan_result[ip]["finished"] = False 
+            self.scan_result[ip]["type"] = "ipv6"
+            arraytemp.append((ip,"ipv6"))
+            if (index+1) % ipParThr == 0  or index+1 ==  len(adressesipv6) :
+                self.arrayThr.put((arraytemp,"ipv6"))
+                arraytemp = []
         
         self.startThread()
         generateReport(self.scan_result)
@@ -52,8 +84,15 @@ class Scan_Manager():
         
         while True != self.arrayThr.empty():
             temp = self.arrayThr.get()
-            scan.doScanIp4(temp, self.scan_result)
-
+            # temp est un tuple
+            # temp[0] array de ips
+            # temp[1] type de ips ipv4/6
+            
+            print("taille tuple",temp)
+            if temp[1] == "ipv6":
+                scan.doScanIp6(temp[0], self.scan_result)
+            elif temp[1] == "ipv4":
+                scan.doScanIp4(temp[0], self.scan_result)          
             
         
             
