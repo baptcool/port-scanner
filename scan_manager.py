@@ -13,7 +13,7 @@ class Scan_Manager():
 
     def __init__(self, thread_enable,nbThr, adressesipv4, adressesipv6 ):
 
-        self.arrayThr =  queue.Queue() #la queue des tâches à faire
+        self.arrayThr =  queue.Queue() #la queue des tasches a(non ascii) faire
     
         if thread_enable == 1:
             if nbThr >=1:
@@ -32,13 +32,13 @@ class Scan_Manager():
         if nbIp < self.nbThr:
             self.nbThr = nbIp
         ipParThr = nbIp//self.nbThr
-        #chaque thread a le même nombre de scan(ip) à faire
+        #chaque thread a le meme nombre de scan(ip) a(non ascii) faire
         arraytemp = []         
         
             
         # *******
-        # on met dans la Queue arrayThr des tâches qui sont des listes d'IPs
-        # on ne mélange pas les ipv4 et ipv6 par tâche
+        # on met dans la Queue arrayThr des taches qui sont des listes d IPs
+        # on ne melange pas les ipv4 et ipv6 par tache
         for index,ip in enumerate(adressesipv4):
             self.scan_result[ip] = dict()
             self.scan_result[ip]["finished"] = False 
@@ -69,7 +69,7 @@ class Scan_Manager():
         #Chaque thread execute cette fonction
         
         
-        #Tant qu'il y a des tâches à faire dans la Queue
+        #Tant qu il y a des taches a(non ascii) faire dans la Queue
         while True != self.arrayThr.empty():
             temp = self.arrayThr.get()
             # temp est un tuple
@@ -103,10 +103,10 @@ class Scan_Manager():
                     self.lock.release()
                 
                 
-                #on prépare les threads
+                #on prepare les threads
                 array.append(threading.Thread(target = self.threadtask, args=[]))
             for e in array:
-                #puis on démarre les threads
+                #puis on demarre les threads
                 e.start()
                
             print("scan started")
@@ -123,7 +123,7 @@ class Scan_Manager():
                 
                 
                 
-            #enfin, lorsque le scan est terminé, on affiche un cours résumé
+            #enfin, lorsque le scan est termine, on affiche un cours resume
             try:
                 for host in self.scan_result:
                                   

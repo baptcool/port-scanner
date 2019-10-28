@@ -9,7 +9,7 @@ def ecritureFichier(htmlText):
         print("error while writing scan repport")
 
 
-#création d'un rapport au format html
+#creation d un rapport au format html
 
 def generateReport(result):
     head = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"xml:lang=\"en\" lang=\"en\"><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />  <title>Scan Report</title> </head><body> <center><h2>Scan Report</h2> <p>Total hosts : totalhosts   Up hosts : uphosts</p></center><br>"
@@ -26,7 +26,7 @@ def generateReport(result):
     totalhosts=0
     
     
-    #on regarde dans le dictionnaire result les ips scannées et on complète les templates htmls
+    #on regarde dans le dictionnaire result les ips scannees et on complete les templates htmls
     try:
         for host in result:
 
@@ -54,7 +54,7 @@ def generateReport(result):
                 except Exception as ex:
                     if 'tcp' not in result[host]["res"]["scan"][sousHost]:
                         temptemplateMachine = temptemplateMachine.replace("#ici	", "No open Ports" ) 
-                    # pas de ports ouverts pour un scan, c'est normal !
+                    # pas de ports ouverts pour un scan, c est normal 
                     pass
                 temptemplateMachine = temptemplateMachine.replace("#ici	", "") 
                 htmlText.append(temptemplateMachine)
