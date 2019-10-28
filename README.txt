@@ -28,7 +28,7 @@ Installation :
     pip3 install python-nmap   (si python 3 ) 
     
     Pour tester le bon fonctionnement du programme :
-        python test.py
+        python tests/test.py
         
         devrait retourner  : tout fonctionne
     
