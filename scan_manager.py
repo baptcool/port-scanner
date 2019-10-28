@@ -11,7 +11,7 @@ import scan
 
 class Scan_Manager():
 
-    def __init__(self, thread_enable,nbThr, adressesipv4, adressesipv6 ):
+    def __init__(self, thread_enable,nbThr, adressesipv4, adressesipv6 , fileNameOutput):
 
         self.arrayThr =  queue.Queue() #la queue des tasches a(non ascii) faire
     
@@ -61,7 +61,7 @@ class Scan_Manager():
         
         
         self.startThread()
-        generateReport(self.scan_result)
+        generateReport(self.scan_result, fileNameOutput)
 
 
 
@@ -119,7 +119,8 @@ class Scan_Manager():
                 for k, v in self.scan_result.items():
                     if v["finished"] == True:
                         PourcentageFinished += 1
-                PourcentageFinished =round(PourcentageFinished/len(self.scan_result.items()) *100)
+                
+                PourcentageFinished =round(float(PourcentageFinished)/float(len(self.scan_result.items())) *100)
                 
                 
                 

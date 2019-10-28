@@ -10,18 +10,22 @@ def get_user_parameters():
     parser.add_argument("--host", help="one IP  ipv4 / ipv6 ", type=str)
     parser.add_argument("--hosts",nargs='*', help="multiple IPs ipv4 / ipv6", type=str)
     parser.add_argument("--fileHosts", help="File containing the list of IPs", type=str)
+    parser.add_argument("--outputFile", help="File containing the scan result", type=str)
 
     args = parser.parse_args()
     adressesipv4 = []
     adressesipv6 = []
-    cidrs = []
+    fileNameOutput = "Report.html"
+    if args.outputFile != None:
+        fileNameOutput =  args.outputFile 
     if args.host != None:
         insertionAdresse(args.host,adressesipv4,adressesipv6 )
         
     elif args.hosts != None:
         for adresse in args.hosts:
             insertionAdresse(adresse,adressesipv4,adressesipv6)
-            
+     
+        
     elif args.fileHosts != None:
         try:
             file = open(args.fileHosts)
@@ -37,7 +41,7 @@ def get_user_parameters():
     else:
         print("--help to see usage")
         exit()
-    return adressesipv4, adressesipv6
+    return adressesipv4, adressesipv6, fileNameOutput
 
 
 

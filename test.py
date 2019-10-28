@@ -7,7 +7,7 @@ import threading
 import argparse
 
 
-assert nmap.PortScanner() == None
+assert nmap.PortScanner() != None
 
 
 print("tout fonctionne")
