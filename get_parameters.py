@@ -1,9 +1,8 @@
 import os
 import argparse
-import logging
-from logger import Logger
+
+
 import re
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 
 def get_user_parameters():
@@ -18,11 +17,11 @@ def get_user_parameters():
     cidrs = []
     if args.host != None:
         insertionAdresse(args.host,adressesipv4,adressesipv6 )
-        #ici cidrs
+        
     elif args.hosts != None:
         for adresse in args.hosts:
             insertionAdresse(adresse,adressesipv4,adressesipv6)
-            #ici cidrs
+            
     elif args.fileHosts != None:
         try:
             file = open(args.fileHosts)
