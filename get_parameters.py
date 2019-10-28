@@ -8,9 +8,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 
 def get_user_parameters():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", help="ipv4 / ipv6 ", type=str)
-    parser.add_argument("--hosts",nargs='*', help="ipv4 / ipv6", type=str)
-    parser.add_argument("--listeHost", help="fichier contenant les adresses", type=str)
+    parser.add_argument("--host", help="one IP  ipv4 / ipv6 ", type=str)
+    parser.add_argument("--hosts",nargs='*', help="multiple IPs ipv4 / ipv6", type=str)
+    parser.add_argument("--fileHosts", help="File containing the list of IPs", type=str)
 
     args = parser.parse_args()
     adressesipv4 = []
@@ -23,9 +23,9 @@ def get_user_parameters():
         for adresse in args.hosts:
             insertionAdresse(adresse,adressesipv4,adressesipv6)
             #ici cidrs
-    elif args.listeHost != None:
+    elif args.fileHosts != None:
         try:
-            file = open(args.listeHost)
+            file = open(args.fileHosts)
             content = file.readlines()
             file.close()
 
@@ -36,7 +36,7 @@ def get_user_parameters():
         except IOError:
             print('Erreur d\'ouverture.')
     else:
-        print("--help pour voir l'usage")
+        print("--help to see usage")
         exit()
     return adressesipv4, adressesipv6
 
