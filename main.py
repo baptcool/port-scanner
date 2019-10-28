@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from get_parameters import get_user_parameters
 import os
 import argparse

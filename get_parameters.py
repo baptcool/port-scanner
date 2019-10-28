@@ -33,7 +33,7 @@ def get_user_parameters():
         except FileNotFoundError:
             print('Fichier introuvable.')
         except IOError:
-            print('Erreur d\'ouverture.')
+            print('Erreur d ouverture.')
     else:
         print("--help to see usage")
         exit()
